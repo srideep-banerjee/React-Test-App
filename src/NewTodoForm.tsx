@@ -1,10 +1,14 @@
+import React from "react"
 import { useState } from "react"
 //import "./styles.css"
 
-export function NewtodoForm({onSubmit}) {
+type NewtodoFormProps = {
+    onSubmit: (title:string) => void
+}
+export function NewtodoForm({onSubmit}: NewtodoFormProps) {
     const [newItem, setNewItem] = useState("")
     
-    function handleSubmit(e){
+    function handleSubmit(e:React.FormEvent<HTMLFormElement>){
         e.preventDefault()
         if(newItem==="")return
         onSubmit(newItem)
@@ -12,7 +16,7 @@ export function NewtodoForm({onSubmit}) {
     }
     
     return (
-        <form onSubmit={(e)=>{handleSubmit(e)}} className="new-item-form">
+        <form onSubmit={(e)=>handleSubmit(e)} className="new-item-form">
             <div className="form-row">
                 <label htmlFor="item">
                     New Item
